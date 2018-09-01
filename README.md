@@ -1,8 +1,8 @@
 # system-jiang vue项目实战
 
-#准备工作
-##安装vue-cli (2版本)
-> npm i vue-cli -g
+# 准备工作
+## 安装vue-cli (2版本)
+1. npm i vue-cli -g
 >> 查看版本
 >> vue -V
 >> 2.9.3
@@ -21,4 +21,4 @@
 > 初始化项目
 >> vue init webpack system-jiang
 
-#进行开发
+# 进行开发
