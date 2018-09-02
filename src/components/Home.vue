@@ -1,0 +1,56 @@
+<template>
+  <div>
+    <div class="my-wrapper">
+      <img class="my-bg" src="../assets/bg.jpg" alt="">
+      <div class="my-name">草原王子</div>
+      <img class="my-avatar" src="../assets/avatar.jpeg" alt="">
+    </div>
+    <div class="friends-wrapper">
+      ing...
+    </div>
+  </div>
+</template>
+<script>
+import 'amfe-flexible'
+
+export default {
+  name: 'Home'
+}
+</script>
+<style scoped>
+  .my-wrapper {
+    position: relative;
+    width: 10rem;
+    height: 6.666667rem /* 500/75 */;
+  }
+  .my-bg {
+    width: 10rem;
+    height: 6.666667rem /* 500/75 */;
+  }
+  .my-name {
+    position: absolute;
+    right: 2.266667rem /* 170/75 */;
+    text-align: right;
+    bottom: 0;
+    width: 7.733333rem /* 580/75 */;
+    height: .666667rem /* 50/75 */;
+    line-height: .666667rem /* 50/75 */;
+    padding-right: .266667rem /* 20/75 */;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: .4rem /* 30/75 */;
+  }
+  .my-avatar {
+    position: absolute;
+    right: .666667rem /* 50/75 */;
+    bottom: -.266667rem /* 20/75 */;
+    width: 1.6rem /* 120/75 */;
+    height: 1.6rem /* 120/75 */;
+    border: .026667rem /* 2/75 */ solid #eee;
+    box-sizing: border-box;
+  }
+  .friends-wrapper {
+    width: 10rem;
+    min-height: 13.333333rem /* 1000/75 */;
+  }
+</style>
