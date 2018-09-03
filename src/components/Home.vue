@@ -1,20 +1,22 @@
 <template>
   <div>
     <div class="my-wrapper">
-      <img class="my-bg" src="../assets/bg.jpg" alt="">
+      <img class="my-bg" src="@/assets/bg.jpg" alt="">
       <div class="my-name">草原王子</div>
-      <img class="my-avatar" src="../assets/avatar.jpeg" alt="">
+      <img class="my-avatar" src="@/assets/avatar.jpeg" alt="">
     </div>
-    <div class="friends-wrapper">
-      ing...
-    </div>
+    <friend></friend>
   </div>
 </template>
 <script>
 import 'amfe-flexible'
+import Friend from '@/components/common/Friend.vue'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    friend: Friend
+  }
 }
 </script>
 <style scoped>
@@ -48,9 +50,5 @@ export default {
     height: 1.6rem /* 120/75 */;
     border: .026667rem /* 2/75 */ solid #eee;
     box-sizing: border-box;
-  }
-  .friends-wrapper {
-    width: 10rem;
-    min-height: 13.333333rem /* 1000/75 */;
   }
 </style>

@@ -27,8 +27,8 @@
 ### 路由表
 名称 | 路由 | 组件
 ---- | ---- | ----
-首页 | /home | Home.vue
-我 | /me | Me.vue
+圈子 | /home | Home.vue
+我的 | /me | Me.vue
 
 #### to or :to
 to 是访问组件的路径
@@ -39,4 +39,9 @@ redirect:'/指定子路由'
 this.$router.push({
   path:'指定路径'
 })
+
+### 组件列表
+>tab  
+>friend  
+
 

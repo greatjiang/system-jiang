@@ -1,7 +1,7 @@
 <template>
   <ul class="tab-wrapper">
     <li class="tab" :class="item.cur" @click="tabAction(index)"  v-for="(item,index) in tablist" :key="index">
-      <img class="tab-icon" src="@/assets/logo.png">
+      <img class="tab-icon" :src="imglist[index].img[0]">
       <div class="tab-name">{{ item.name }}</div>
     </li>
   </ul>
@@ -13,7 +13,17 @@ export default {
   name: 'Tab',
   data () {
     return {
-      tablist: [{name: '圈子', cur: 'active', url: '/home'}, {name: '我的', cur: '', url: '/me'}]
+      tablist: [
+        {name: '圈子', cur: 'active', url: '/home'},
+        {name: '我的', cur: '', url: '/me'}
+      ],
+      imglist: [{
+        name: 'friend',
+        img: [require('../../assets/friend-selected.png'), require('../../assets/friend.png')]
+      }, {
+        name: 'me',
+        img: [require('../../assets/me.png'), require('../../assets/me-selected.png')]
+      }]
     }
   },
   methods: {
@@ -21,6 +31,12 @@ export default {
       for (let item of this.tablist) {
         item.cur = ''
       }
+
+      for (let i = 0; i < this.imglist.length; i++) {
+        // swap
+        [this.imglist[i].img[0], this.imglist[i].img[1]] = [this.imglist[i].img[1], this.imglist[i].img[0]]
+      }
+
       this.tablist[index].cur = 'active'
       const dest = this.tablist[index].url
       this.$router.push({
@@ -52,6 +68,7 @@ export default {
     width: .533333rem /* 40/75 */;
     height: .533333rem /* 40/75 */;
     margin: 0 auto;
+    margin-top: .133333rem /* 10/75 */;
     display: block;
   }
   .tab-name{
