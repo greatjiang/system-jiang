@@ -83,10 +83,11 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
-        },
-        onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+        }
+        // 去掉错误的mac提示
+        // onErrors: config.dev.notifyOnErrors
+        // ? utils.createNotifierCallback()
+        // : undefined
       }))
 
       resolve(devWebpackConfig)

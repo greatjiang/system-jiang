@@ -39,6 +39,8 @@ redirect:'/指定子路由'
 this.$router.push({
   path:'指定路径'
 })
+#### 当前路由
+this.$route.path
 
 ### 组件列表
 >tab  

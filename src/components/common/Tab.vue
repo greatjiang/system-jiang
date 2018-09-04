@@ -19,15 +19,38 @@ export default {
       ],
       imglist: [{
         name: 'friend',
-        img: [require('../../assets/friend-selected.png'), require('../../assets/friend.png')]
+        img: ['../../static/friend-selected.png', '../../static/friend.png']
       }, {
         name: 'me',
-        img: [require('../../assets/me.png'), require('../../assets/me-selected.png')]
+        img: ['../../static/me.png', '../../static/me-selected.png']
       }]
+    }
+  },
+  mounted () {
+    this.curPath = this.$route.path
+    if (this.curPath === '/me') {
+      this.curTab = 1
+      for (let i = 0; i < this.imglist.length; i++) {
+        // swap
+        [this.imglist[i].img[0], this.imglist[i].img[1]] = [this.imglist[i].img[1], this.imglist[i].img[0]]
+      }
+    } else {
+      this.curTab = 0
+    }
+
+    for (const item of this.tablist) {
+      if (item.url === this.curPath) {
+        item.cur = 'active'
+      } else {
+        item.cur = ''
+      }
     }
   },
   methods: {
     tabAction (index) {
+      if (index === this.curTab) return false
+      this.curTab = index
+
       for (let item of this.tablist) {
         item.cur = ''
       }
@@ -52,7 +75,7 @@ export default {
     bottom: 0;
     width: 10rem;
     height: 1.333333rem /* 100/75 */;
-    background: rgba(243, 241, 241,.4);
+    background: rgba(243, 241, 241,.7);
     border-top: .02rem solid #eee;
     box-sizing: border-box;
   }
@@ -75,7 +98,7 @@ export default {
     width: 5rem;
     height: .8rem /* 60/75 */;
     text-align: center;
-    font-size: .4rem /* 30/75 */;
+    font-size: 30px;
   }
   .tab.active{
     color: rgb(76, 150, 76);

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="my-wrapper">
-      <img class="my-bg" src="@/assets/bg.jpg" alt="">
+      <img class="my-bg" src="../../static/bg.jpg" alt="">
       <div class="my-name">草原王子</div>
-      <img class="my-avatar" src="@/assets/avatar.jpeg" alt="">
+      <img class="my-avatar" src="../../static/avatar.jpeg" alt="">
     </div>
     <friend></friend>
   </div>

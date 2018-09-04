@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
+    "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

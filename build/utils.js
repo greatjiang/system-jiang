@@ -50,6 +50,14 @@ exports.cssLoaders = function (options) {
         fallback: 'vue-style-loader'
       })
     } else {
+      // 添加px2rem-loader
+      loaders.push({
+        loader: 'px2rem-loader',
+        options: {
+          remUni: 75,
+          remPrecision:4
+        }
+      })
       return ['vue-style-loader'].concat(loaders)
     }
   }
@@ -62,7 +70,8 @@ exports.cssLoaders = function (options) {
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    styl: generateLoaders('stylus'),
+    px2rem: generateLoaders('px2rem')
   }
 }
 

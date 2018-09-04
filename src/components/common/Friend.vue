@@ -1,7 +1,7 @@
 <template>
   <div class="friends-wrapper">
     <div class="friend" v-for="(item, index) in friednlist" :key="index">
-      <img class="friend-avatar" src="@/assets/1.jpeg" alt="">
+      <img class="friend-avatar" src="../../../static/1.jpeg" alt="">
       <div class="friend-mes-wrapper">
         <div class="friend-name">草原公主</div>
         <div class="friend-mes">
@@ -12,10 +12,10 @@
           堆栈区域存储着活动过程调用的指令和本地变量。
         </div>
         <ul class="friend-photo-wrapper">
-          <li><img src="@/assets/1.jpeg" alt=""></li>
-          <li><img src="@/assets/1.jpeg" alt=""></li>
-          <li><img src="@/assets/1.jpeg" alt=""></li>
-          <li><img src="@/assets/1.jpeg" alt=""></li>
+          <li><img src="../../../static/1.jpeg" alt=""></li>
+          <li><img src="../../../static/1.jpeg" alt=""></li>
+          <li><img src="../../../static/1.jpeg" alt=""></li>
+          <li><img src="../../../static/1.jpeg" alt=""></li>
         </ul>
         <div class="clear-both"></div>
         <div class="time">1小时前</div>
