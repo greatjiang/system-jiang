@@ -46,4 +46,12 @@ this.$route.path
 >tab  
 >friend  
 
-
+### 组件间的事件传递
+><go-back @backaction="back"></go-back>   
+>backaction 是在子组件中通过 this.$emit('backaction') 触发的   
+><div class="nav-wrapper" @click="back">...    
+    back () {    
+      this.$emit('backaction')    
+    }    
+    返回上一次历史
+    this.$router.go(-1)
