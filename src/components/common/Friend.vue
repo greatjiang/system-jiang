@@ -1,21 +1,16 @@
 <template>
   <div class="friends-wrapper">
     <div class="friend" v-for="(item, index) in friednlist" :key="index">
-      <img class="friend-avatar" src="../../../static/1.jpeg" alt="">
+      <img class="friend-avatar" :src="item.avatar" alt="">
       <div class="friend-mes-wrapper">
-        <div class="friend-name">草原公主</div>
+        <div class="friend-name">{{ item.name }}</div>
         <div class="friend-mes">
-          进程是系统资源分配的最小单位, 系统由一个个进程(程序)组成
-          一般情况下，包括文本区域（text region）、数据区域（data region）和堆栈（stack region）。
-          文本区域存储处理器执行的代码
-          数据区域存储变量和进程执行期间使用的动态分配的内存；
-          堆栈区域存储着活动过程调用的指令和本地变量。
+          {{ item.content }}
         </div>
         <ul class="friend-photo-wrapper">
-          <li><img src="../../../static/1.jpeg" alt=""></li>
-          <li><img src="../../../static/1.jpeg" alt=""></li>
-          <li><img src="../../../static/1.jpeg" alt=""></li>
-          <li><img src="../../../static/1.jpeg" alt=""></li>
+          <li v-for="(item2, index2) in item.photos" :key="index2">
+            <img :src="item2" alt="">
+          </li>
         </ul>
         <div class="clear-both"></div>
         <div class="time">1小时前</div>
@@ -28,12 +23,36 @@
 </template>
 <script>
 import 'amfe-flexible'
+import Mock from 'mockjs'
 
 export default {
   name: 'Friend',
   data () {
     return {
-      friednlist: [1, 1, 1]
+      friednlist: []
+    }
+  },
+  mounted () {
+    this.mockdata()
+  },
+  methods: {
+    mockdata () {
+      let Random = Mock.Random
+      Random.csentence(5, 8)
+      Random.cname()
+      Random.cparagraph()
+      Random.dataImage('100x100')
+      let obj = Mock.mock({
+        'list|5-15': [{
+          'content': '@cparagraph',
+          'name': '@cname()',
+          'avatar': '@dataImage("100x100")',
+          'photos|1-9': [
+            '@dataImage("100x100")'
+          ]
+        }]
+      })
+      this.friednlist = obj.list
     }
   }
 }

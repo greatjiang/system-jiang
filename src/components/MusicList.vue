@@ -5,8 +5,8 @@
       <li class="list-child" v-for="(item, index) in songlist" :key="index" @click="goPlaying">
        <div class="list-index">{{ (index+1) }}</div>
        <div class="song-mes">
-        <div class="song-name">呼伦贝尔大草原</div>
-        <div class="singer">草原王子</div>
+        <div class="song-name">{{ item.songname }}</div>
+        <div class="singer">{{ item.name }}</div>
        </div>
       </li>
     </ul>
@@ -14,13 +14,17 @@
 </template>
 <script>
 import GoBack from '@/components/common/GoBack.vue'
+import Mock from 'mockjs'
 
 export default {
   name: 'MusicList',
   data () {
     return {
-      songlist: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      songlist: []
     }
+  },
+  mounted () {
+    this.mockdata()
   },
   components: {
     'go-back': GoBack
@@ -35,6 +39,18 @@ export default {
       this.$router.push({
         path: '/playingpage'
       })
+    },
+    mockdata () {
+      let Random = Mock.Random
+      Random.csentence(5, 8)
+      Random.cname()
+      let obj = Mock.mock({
+        'list|20-40': [{
+          'name': '@cname()',
+          'songname': '@csentence(5,8)'
+        }]
+      })
+      this.songlist = obj.list
     }
   }
 }

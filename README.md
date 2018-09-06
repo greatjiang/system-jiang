@@ -55,3 +55,23 @@ this.$route.path
     }    
     返回上一次历史
     this.$router.go(-1)
+
+### 添加Mock模块
+    mockdata () {
+      let Random = Mock.Random
+      Random.csentence(5, 8)
+      Random.cname()
+      Random.cparagraph()
+      Random.dataImage('100x100')
+      let obj = Mock.mock({
+        'list|5-15': [{
+          'content': '@cparagraph',
+          'name': '@cname()',
+          'avatar': '@dataImage("100x100")',
+          'photos|1-9': [
+            '@dataImage("100x100")'
+          ]
+        }]
+      })
+      this.friednlist = obj.list
+    }
