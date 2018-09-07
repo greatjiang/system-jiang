@@ -4,7 +4,7 @@
 > http://47.95.218.80:8888/#/home  
 
 ### 技术栈
->  vue全家桶 vue-cli px2rem mockjs
+>  vue全家桶 vue-cli px2rem mockjs flexible
 
 ## 准备工作
 #### 安装vue-cli (2版本)
