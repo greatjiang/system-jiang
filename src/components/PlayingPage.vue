@@ -1,7 +1,7 @@
 <template>
   <div>
     <go-back @backaction="back"></go-back>
-    <div class="song-pictute-wrapper rotate">
+    <div class="song-pictute-wrapper " :class="rotateFlag">
       <img src="../../static/princess.jpeg" alt="">
     </div>
     <div class="opreate-wrapper">
@@ -15,12 +15,15 @@
       <div class="play-controller">
         <div class="progress-wrapper">
           <div class="timenum">{{ curtime | formatTime}}</div>
-          <div class="progress-line"></div>
+          <div class="progress-line-content">
+            <div class="progress-line" :style="{width: progress+'%'}"></div>
+            <div class="progress-btn" :style="{left: progress+'%'}" v-show="progressBtnFlag"></div>
+          </div>
           <div class="timenum">{{ totaltime | formatTime}}</div>
         </div>
         <div class="play-wrapper">
           <div class="play-prev"></div>
-          <div class="play-btn"></div>
+          <div class="play-btn" :class="pauseFlag" @click="audioAction"></div>
           <div class="play-next"></div>
         </div>
       </div>
@@ -43,7 +46,9 @@ export default {
       pauseFlag: '',
       timer: '', // 播放的timer
       timer2: '', // 进度条的timer
-      workpath: ''
+      workpath: '',
+      rotateFlag: '',
+      hadListenedTime: 0
     }
   },
   components: {
@@ -64,19 +69,27 @@ export default {
       return `平均得分:${val}分`
     }
   },
+  mounted () {
+    this.setAudioSource()
+    this.dragAction()
+  },
   methods: {
     back () {
       this.$router.push({
         path: '/musiclist'
       })
     },
+    setAudioSource () {
+      let video = document.getElementById('bottleAudio')
+      video.setAttribute('src', '../../static/lemon.mp3')
+    },
     audioAction () {
       clearInterval(this.timer)
       clearInterval(this.timer2)
-
       let video = document.getElementById('bottleAudio')
+      console.log(video.paused)
       if (video.paused) {
-        video.play()
+        if (!this.curtime)video.play()
         this.loadFlag = true
         this.timer = setInterval(() => {
           if (video.readyState === 4) {
@@ -86,6 +99,7 @@ export default {
               video.currentTime = this.curtime
             }
             video.play()
+            this.rotateFlag = 'rotate'
             this.pauseFlag = 'pause'
             this.progressBtnFlag = true
             this.totaltime = video.duration
@@ -96,25 +110,16 @@ export default {
                 this.hadListenedTime = 0
                 clearInterval(this.timer)
                 clearInterval(this.timer2)
+                this.rotateFlag = ''
               }
               // 当前时间
               this.curtime = video.currentTime.toFixed(2)
-              let curSecond = Math.floor(this.curtime)
-              // 当前歌词
-              for (const item of this.lyrics) {
-                if (item.secs === curSecond) {
-                  this.curlyrcis = item.lrc
-                }
-              }
               // 进度条
               this.progress = (
                 video.currentTime /
                 video.duration *
                 100
               ).toFixed(2)
-              // 累计听歌时长
-              this.hadListenedTime += 1
-              console.log(`累计听歌时长${this.hadListenedTime}`)
             }, 1000)
           }
         }, 1000)
@@ -124,11 +129,12 @@ export default {
         clearInterval(this.timer2)
         this.loadFlag = false
         this.pauseFlag = ''
+        this.rotateFlag = ''
       }
     },
     dragAction () {
       let that = this
-      let width = document.querySelector('.audio-wrapper').offsetWidth
+      let width = document.querySelector('.progress-line-content').offsetWidth
       // 拖拽事件
       let touch = document.querySelector('.progress-btn')
       touch.addEventListener('touchstart', handleStart, false)
@@ -170,6 +176,17 @@ export default {
 }
 </script>
 <style scoped>
+.progress-btn {
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(231, 231, 231);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.6);
+}
 .opreate-wrapper {
   position: absolute;
   bottom: 250px;
@@ -306,12 +323,19 @@ export default {
   text-align: center;
   color: #fff;
 }
-.progress-line {
+.progress-line-content {
+  position: relative;
   width: 550px;
   height: 4px;
   background-color: #fff;
   vertical-align: middle;
   display: inline-block;
+}
+.progress-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: aliceblue;
 }
 .play-wrapper {
   width: 320px;
@@ -339,6 +363,10 @@ export default {
   background: url('../../static/play.png') no-repeat;
   background-size: 100%;
   margin: 0 64px;
+}
+.play-btn.pause {
+  background: url('../../static/pause.png') no-repeat;
+  background-size: 100%;
 }
 .play-next {
   width: 64px;
