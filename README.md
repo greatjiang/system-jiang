@@ -81,3 +81,6 @@ this.$route.path
       })
       this.friednlist = obj.list
     }
+
+### 播放功能完成
+> 播放 暂停 拖拽
