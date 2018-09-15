@@ -1,7 +1,7 @@
 const os = require('os') // 操作系统
 let interfaces = os.networkInterfaces() // 网络接口
 
-let getIp = function () {
+let showIP = function () {
   let IPv4
   if (process.platform === 'darwin') {
     for (const item of interfaces.en0) {
@@ -23,4 +23,4 @@ let getIp = function () {
 
   return IPv4
 }
-module.exports = getIp()
+module.exports = showIP()

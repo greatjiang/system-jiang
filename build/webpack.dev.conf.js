@@ -11,7 +11,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
 const opn = require('opn')
-const CbPlugin = require('../plugins/cb')
+const HelloWorldPlugin = require('../plugins/cb')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -94,11 +94,12 @@ module.exports = new Promise((resolve, reject) => {
         // : undefined
       }))
 
-      devWebpackConfig.plugins.push(new CbPlugin({
-        cb:function (){
-          opn(`http://${devWebpackConfig.devServer.host}:${port}`,{app: 'google chrome'})
-        }
-      }))
+      // devWebpackConfig.plugins.push(new HelloWorldPlugin({
+      //   setting: true
+      //   // cb:function (){
+      //   //   opn(`http://${devWebpackConfig.devServer.host}:${port}`,{app: 'google chrome'})
+      //   // }
+      // }))
 
       resolve(devWebpackConfig)
     }

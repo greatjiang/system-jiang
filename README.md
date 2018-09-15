@@ -4,7 +4,7 @@
 > http://47.95.218.80:8888/#/home  
 
 ### 技术栈
->  vue全家桶 vue-cli px2rem mockjs flexible
+>  vue全家桶 vue-cli px2rem mockjs flexible css3
 
 ## 准备工作
 #### 安装vue-cli (2版本)
@@ -84,3 +84,28 @@ this.$route.path
 
 ### 播放功能完成
 > 播放 暂停 拖拽
+
+### 配置API代理
+> config/index.js  
+
+    proxyTable: { //配置跨域  
+      '/api': {  
+        target: 'http://47.95.218.80:3000',  
+        changeOrigin: true,  
+        pathRewrite: {  
+          '^/api': '/'  
+        }  
+      }  
+    },  
+
+>使用  
+
+    getData () {
+      axios.get(
+        '/api/getData'
+      ).then(res => {
+        console.log(res.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    }

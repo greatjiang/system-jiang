@@ -1,10 +1,11 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
-const myIp = require('../utils-jiang/getIp.js')
+// const myIp = require('../utils-jiang/getIp.js')
+const bestip = require('bestip')
 const path = require('path')
 
-console.log(`myIp:${myIp}`);
+// console.log(`myIp:${myIp}`);
 
 module.exports = {
   dev: {
@@ -12,11 +13,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { //配置跨域
+      '/api': {
+        target: 'http://47.95.218.80:3000',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     // host: '0.0.0.0', // can be overwritten by process.env.HOST
-    host: myIp,
+    host: bestip,
     port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
      // autoOpenBrowser: false,
     autoOpenBrowser: true,
