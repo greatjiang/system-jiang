@@ -10,7 +10,7 @@
 </template>
 <script>
 import 'amfe-flexible'
-import axios from 'axios'
+// import axios from 'axios'
 
 import Friend from '@/components/common/Friend.vue'
 
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getData () {
-      axios.get(
+      this.$axios.get(
         '/api/getData'
       ).then(res => {
         console.log(res.data)

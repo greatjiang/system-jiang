@@ -15,7 +15,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: { //配置跨域
       '/api': {
-        target: 'http://47.95.218.80:3000',
+        // target: 'http://47.95.218.80:3000',
+        target:`http://${bestip}:3000`,
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/'
