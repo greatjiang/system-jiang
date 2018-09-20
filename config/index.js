@@ -13,7 +13,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: { //配置跨域
+    proxyTable: { //配置代理 解决跨域
       '/api': {
         // target: 'http://47.95.218.80:3000',
         target:`http://${bestip}:3000`,

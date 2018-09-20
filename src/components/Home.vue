@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="my-wrapper">
-      <img class="my-bg" src="../../static/bg.jpg" alt="">
+      <img class="my-bg" :src="myBg" v-cloak v-show="myBg">
+      <input class="select-file" type="file" name="upload" multiple="multiple" ref="selectimage" @change="selectBg">
       <div class="my-name">草原王子</div>
       <img class="my-avatar" src="../../static/avatar.jpeg" alt="">
     </div>
@@ -10,8 +11,6 @@
 </template>
 <script>
 import 'amfe-flexible'
-// import axios from 'axios'
-
 import Friend from '@/components/common/Friend.vue'
 
 export default {
@@ -19,15 +18,43 @@ export default {
   components: {
     friend: Friend
   },
+  data () {
+    return {
+      myBg: ''
+    }
+  },
   mounted () {
-    this.getData()
+    this.getAvatar()
   },
   methods: {
-    getData () {
-      this.$axios.get(
-        '/api/getData'
+    getAvatar () {
+      this.$axios.post(
+        '/api/getAvatar'
       ).then(res => {
-        console.log(res.data)
+        if (res.data.code === 0) {
+          this.myBg = res.data.data.avatar
+        }
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    selectBg (e) {
+      const selectfile = this.$refs.selectimage.files[0]
+      selectfile && this.upload()
+    },
+    upload () {
+      const selectfile = this.$refs.selectimage
+      let formData = new FormData()
+      formData.append('file', selectfile.files[0])
+      this.$axios.post(
+        '/api/upload',
+        formData
+      ).then(res => {
+        if (res.data.code === 0) {
+          this.getAvatar()
+        } else {
+          alert(res.data.msg)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -36,6 +63,19 @@ export default {
 }
 </script>
 <style scoped>
+  [v-cloak] {
+    display: none;
+  }
+  .select-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10rem;
+    height: 500px;
+    font-size: 0;
+    outline: none;
+    opacity: 0;
+  }
   .my-wrapper {
     position: relative;
     width: 10rem;
