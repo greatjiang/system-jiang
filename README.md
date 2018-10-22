@@ -1,7 +1,5 @@
 # system-jiang vue项目实战
 
-### 项目预览
-> http://47.95.218.80:8888/#/home  
 
 ### 技术栈
 >  vue全家桶 vue-cli px2rem mockjs flexible css3
