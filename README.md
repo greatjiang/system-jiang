@@ -1,6 +1,5 @@
 # system-jiang vue项目实战
 
-
 ### 技术栈
 >  vue全家桶 vue-cli px2rem mockjs flexible css3
 
